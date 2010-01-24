@@ -29,7 +29,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%_libdir/mozilla/kmozillahelper
+%_prefix/lib/mozilla/kmozillahelper
 %_kde_appsdir/kmozillahelper/kmozillahelper.notifyrc
 %exclude %_prefix/src/debug/kmozillahelper
 
