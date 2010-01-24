@@ -7,6 +7,9 @@ Version:        0.6
 Release:        %mkrel 1
 Url:            http://www.opensuse.org/
 Source:         kmozillahelper-%{version}.tar.bz2
+
+BuildRequires:  kde4-macros
+
 Provides:       mozilla-xulrunner191-kde4 = %version-release
 Provides:       mozilla-xulrunner-kde4 = %version-release
 
