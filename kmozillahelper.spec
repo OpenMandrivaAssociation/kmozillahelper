@@ -4,9 +4,10 @@ Group:          Graphical desktop/KDE
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Mozilla KDE Integration
 Version:        0.6
-Release:        %mkrel 1
+Release:        %mkrel 2
 Url:            http://www.opensuse.org/
 Source:         kmozillahelper-%{version}.tar.bz2
+Patch0:         kmozillahelper-use-firefox.patch
 
 BuildRequires:  kde4-macros
 BuildRequires:  kdelibs4-devel
@@ -19,6 +20,7 @@ Package providing integration of Mozilla applications with KDE.
 
 %prep
 %setup -qn kmozillahelper
+%patch0 -p0
 
 %build
 %cmake_kde4
