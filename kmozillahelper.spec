@@ -13,6 +13,7 @@ BuildRequires:	kdelibs4-devel
 
 Provides:	mozilla-xulrunner191-kde4 = %{version}-%{release}
 Provides:	mozilla-xulrunner-kde4 = %{version}-%{release}
+Requires:	qt4-qtdbus
 
 %description
 Package providing integration of Mozilla applications with KDE.
