@@ -5,7 +5,8 @@ Release:	1
 License:	MIT
 Group:		Graphical desktop/KDE
 Url:		http://www.opensuse.org/
-Source:		kmozillahelper-%{version}.tar.bz2
+Source0:	kmozillahelper-%{version}.tar.bz2
+Patch0:		kmozillahelper-0.6.4-setwallpaper.patch
 
 BuildRequires:	kde4-macros
 BuildRequires:	kdelibs4-devel
@@ -24,6 +25,7 @@ Package providing integration of Mozilla applications with KDE.
 
 %prep
 %setup -qn kmozillahelper
+%patch0 -p1
 
 %build
 %cmake_kde4

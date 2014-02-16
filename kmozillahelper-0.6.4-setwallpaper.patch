@@ -1,0 +1,41 @@
+diff -urN kmozillahelper/main.cpp kmozillahelper-patched/main.cpp
+--- kmozillahelper/main.cpp	2012-09-11 22:21:34.000000000 +1100
++++ kmozillahelper-patched/main.cpp	2014-02-17 00:37:44.558251967 +1100
+@@ -134,6 +134,8 @@
+         status = handleIsDefaultBrowser();
+     else if( command == "SETDEFAULTBROWSER" )
+         status = handleSetDefaultBrowser();
++    else if( command == "SETWALLPAPER" )
++        status = handleSetWallpaper();
+     else if( command == "DOWNLOADFINISHED" )
+         status = handleDownloadFinished();
+     else
+@@ -588,6 +590,17 @@
+     return true;
+     }
+ 
++bool App::handleSetWallpaper()
++    {
++    if( !readArguments( 1 ))
++        return false;
++    QString wallpaper = getArgument();
++    if( !allArgumentsUsed())
++        return false;
++    KApplication::updateUserTimestamp( 0 ); // TODO
++    return KRun::runCommand( QString("qdbus org.kde.plasma-desktop /App local.PlasmaApp.setWallpaperImage 0 ") + KShell::quoteArg( wallpaper ), NULL );
++    }
++
+ bool App::handleDownloadFinished()
+     {
+     if( !readArguments( 1 ))
+diff -urN kmozillahelper/main.h kmozillahelper-patched/main.h
+--- kmozillahelper/main.h	2012-09-11 17:02:34.000000000 +1100
++++ kmozillahelper-patched/main.h	2014-02-17 00:36:35.847204982 +1100
+@@ -54,6 +54,7 @@
+         bool handleOpenNews();
+         bool handleIsDefaultBrowser();
+         bool handleSetDefaultBrowser();
++        bool handleSetWallpaper();
+         bool handleDownloadFinished();
+         bool writeMimeInfo( KMimeType::Ptr mime );
+         QString getAppForProtocol( const QString& protocol );
