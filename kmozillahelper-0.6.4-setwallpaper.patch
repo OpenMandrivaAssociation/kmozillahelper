@@ -1,0 +1,62 @@
+diff -urN kmozillahelper/main.cpp kmozillahelper-patched/main.cpp
+--- kmozillahelper/main.cpp	2012-09-11 22:21:34.000000000 +1100
++++ kmozillahelper-patched/main.cpp	2014-02-18 18:48:58.000000000 +1100
+@@ -32,6 +32,7 @@
+ #include <kfilefiltercombo.h>
+ #include <kio/job.h>
+ #include <kio/netaccess.h>
++#include <plasma/wallpaper.h>
+ #include <kmessagebox.h>
+ #include <kmimetypetrader.h>
+ #include <knotification.h>
+@@ -134,6 +135,8 @@
+         status = handleIsDefaultBrowser();
+     else if( command == "SETDEFAULTBROWSER" )
+         status = handleSetDefaultBrowser();
++    else if( command == "SETWALLPAPER" )
++        status = handleSetWallpaper();
+     else if( command == "DOWNLOADFINISHED" )
+         status = handleDownloadFinished();
+     else
+@@ -588,6 +591,30 @@
+     return true;
+     }
+ 
++bool App::handleSetWallpaper()
++    {
++    if( !readArguments( 2 ))
++        return false;
++    QString wallpaper = getArgument();
++    QString wallpaperMode = getArgument();
++    Plasma::Wallpaper::ResizeMethod resizeHint;
++    if (wallpaperMode == "CenteredResize")
++        resizeHint = Plasma::Wallpaper::CenteredResize;
++    else if (wallpaperMode == "TiledResize")
++        resizeHint = Plasma::Wallpaper::TiledResize;
++    else if (wallpaperMode == "ScaledResize")
++        resizeHint = Plasma::Wallpaper::ScaledResize;
++    else if (wallpaperMode == "ScaledAndCroppedResize")
++        resizeHint = Plasma::Wallpaper::ScaledAndCroppedResize;
++    else if (wallpaperMode == "MaxpectResize")
++        resizeHint = Plasma::Wallpaper::MaxpectResize;
++    wallpaperMode.setNum((int)resizeHint);
++    if( !allArgumentsUsed())
++        return false;
++    KApplication::updateUserTimestamp( 0 ); // TODO
++    return KRun::runCommand( QString("qdbus org.kde.plasma-desktop /App local.PlasmaApp.setWallpaperImage -1 ") + wallpaperMode + " " + KShell::quoteArg( wallpaper ), NULL );
++    }
++
+ bool App::handleDownloadFinished()
+     {
+     if( !readArguments( 1 ))
+diff -urN kmozillahelper/main.h kmozillahelper-patched/main.h
+--- kmozillahelper/main.h	2012-09-11 17:02:34.000000000 +1100
++++ kmozillahelper-patched/main.h	2014-02-18 18:51:27.070931451 +1100
+@@ -54,6 +54,7 @@
+         bool handleOpenNews();
+         bool handleIsDefaultBrowser();
+         bool handleSetDefaultBrowser();
++        bool handleSetWallpaper();
+         bool handleDownloadFinished();
+         bool writeMimeInfo( KMimeType::Ptr mime );
+         QString getAppForProtocol( const QString& protocol );
