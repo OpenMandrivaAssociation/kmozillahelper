@@ -1,37 +1,36 @@
 Summary:	Mozilla KDE Integration
 Name:		kmozillahelper
-Version:	0.6.4
-Release:	7
+Version:	5.0.1
+Release:	1
 License:	MIT
 Group:		Graphical desktop/KDE
 Url:		http://www.opensuse.org/
-Source0:	kmozillahelper-%{version}.tar.bz2
-Patch0:		kmozillahelper-0.6.4-setwallpaper.patch
+Source0:	kmozillahelper-%{version}.tar.gz
 
-BuildRequires:	kde4-macros
-BuildRequires:	kdelibs4-devel
+BuildRequires:	extra-cmake-modules
+BuildRequires:	cmake(KF5Notifications)
+BuildRequires:	cmake(KF5KIO)
+BuildRequires:	cmake(KF5WindowSystem)
+BuildRequires:	cmake(KF5I18n)
 
 Provides:	mozilla-xulrunner191-kde4 = %{version}-%{release}
 Provides:	mozilla-xulrunner-kde4 = %{version}-%{release}
-Requires:	qt4-qtdbus
 
 %description
 Package providing integration of Mozilla applications with KDE.
 
 %files
 %{_prefix}/lib/mozilla/kmozillahelper
-%{_kde_appsdir}/kmozillahelper/kmozillahelper.notifyrc
-
+%{_datadir}/knotifications5/kmozillahelper.notifyrc
 #--------------------------------------------------------------------
 
 %prep
-%setup -qn kmozillahelper
-%patch0 -p1
+%setup -q
 
 %build
-%cmake_kde4
-%make
+%cmake_kde5
+%ninja
 
 %install
-%makeinstall_std -C build
+%ninja_install -C build
 
