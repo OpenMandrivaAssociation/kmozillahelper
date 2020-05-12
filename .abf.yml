@@ -1,6 +1,2 @@
-removed_sources:
-  kmozillahelper-0.6.4.tar.bz2: 5543ea72a07fb6f3af19cfbb6d1683a5fddaa807
-  kmozillahelper-5.0.1.tar.gz: cc393b456cd47bafc6fd96a0017805e519692d91
-  kmozillahelper-5.0.2.tar.gz: 69dff2bc37860914ea44c13089678e77fe1fd6cc
 sources:
-  kmozillahelper-5.0.3.tar.gz: 27aa516d9778cac68b9d02ff6af425966ca1d3ae
+  kmozillahelper-5.0.5.tar.gz: c299d48455bc9b3ffda2a8286458f18b70aba5dd

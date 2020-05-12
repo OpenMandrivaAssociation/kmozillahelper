@@ -1,6 +1,6 @@
 Summary:	Mozilla KDE Integration
 Name:		kmozillahelper
-Version:	5.0.3
+Version:	5.0.5
 Release:	1
 License:	MIT
 Group:		Graphical desktop/KDE
