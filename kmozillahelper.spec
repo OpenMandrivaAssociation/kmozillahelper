@@ -1,6 +1,6 @@
 Summary:	Mozilla KDE Integration
 Name:		kmozillahelper
-Version:	5.0.5
+Version:	5.0.6
 Release:	1
 License:	MIT
 Group:		Graphical desktop/KDE
@@ -12,9 +12,6 @@ BuildRequires:	cmake(KF5Notifications)
 BuildRequires:	cmake(KF5KIO)
 BuildRequires:	cmake(KF5WindowSystem)
 BuildRequires:	cmake(KF5I18n)
-
-Provides:	mozilla-xulrunner191-kde4 = %{version}-%{release}
-Provides:	mozilla-xulrunner-kde4 = %{version}-%{release}
 
 %description
 Package providing integration of Mozilla applications with KDE.
