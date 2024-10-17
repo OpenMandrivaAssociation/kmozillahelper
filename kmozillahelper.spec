@@ -4,7 +4,7 @@ Version:	5.0.6
 Release:	2
 License:	MIT
 Group:		Graphical desktop/KDE
-Url:		http://www.opensuse.org/
+Url:		https://www.opensuse.org/
 Source0:	kmozillahelper-%{version}.tar.gz
 
 BuildRequires:	extra-cmake-modules
